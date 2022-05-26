@@ -1,6 +1,9 @@
 #ifndef MATHTRANSFORM_H
 #define MATHTRANSFORM_H
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
@@ -15,5 +18,9 @@ float** multiplyMatrices(float(*)[3], float(*)[1], int, int);
 
 float** rotateAroundAxis(float**, float, char, int);
 float** rotateAroundAxis(float(*)[3], float, char, int);
+
+float** rotate2default(float**, int);
+float** rotate2default(float(*)[3], int);
+
 
 #endif

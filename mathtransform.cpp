@@ -201,3 +201,17 @@ float** rotateAroundAxis(float(*matrix)[3], float angle, char axis, int rowsNumb
 		// no break;
 	};
 }
+
+float** rotate2default(float** matrix, int rowsNumber)
+{
+	float** result;
+	result = rotateAroundAxis(matrix, -15.0 * M_PI / 180.0, 'y', rowsNumber);
+	return rotateAroundAxis(result, 60.0 * M_PI / 180.0, 'y', rowsNumber);
+}
+
+float** rotate2default(float(*matrix)[3], int rowsNumber)
+{
+	float** result;
+	result = rotateAroundAxis(matrix, -15.0 * M_PI / 180.0, 'y', rowsNumber);
+	return rotateAroundAxis(result, 60.0 * M_PI / 180.0, 'y', rowsNumber);
+}
