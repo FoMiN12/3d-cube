@@ -21,9 +21,15 @@
     <ClCompile Include="mathtransform.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="graphicengine.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mathtransform.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="graphicengine.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,7 +5,6 @@
 #include <math.h>
 
 #include <iostream>
-#include <SFML/Graphics.hpp>
 
 using namespace std;
 
@@ -21,6 +20,5 @@ float** rotateAroundAxis(float(*)[3], float, char, int);
 
 float** rotate2default(float**, int);
 float** rotate2default(float(*)[3], int);
-
 
 #endif

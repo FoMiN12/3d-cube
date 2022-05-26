@@ -146,9 +146,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="3d-cube.cpp" />
+    <ClCompile Include="graphicengine.cpp" />
     <ClCompile Include="mathtransform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="graphicengine.h" />
     <ClInclude Include="mathtransform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

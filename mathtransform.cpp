@@ -197,13 +197,15 @@ float** rotateAroundAxis(float(*matrix)[3], float angle, char axis, int rowsNumb
 float** rotate2default(float** matrix, int rowsNumber)
 {
 	float** result;
-	result = rotateAroundAxis(matrix, -15.0 * M_PI / 180.0, 'y', rowsNumber);
-	return rotateAroundAxis(result, 50.0 * M_PI / 180.0, 'z', rowsNumber);
+	result = rotateAroundAxis(matrix, -10.0 * M_PI / 180.0, 'y', rowsNumber);
+	result = rotateAroundAxis(result, 5.0 * M_PI / 180.0, 'x', rowsNumber);
+	return rotateAroundAxis(result, 45.0 * M_PI / 180.0, 'z', rowsNumber);
 }
 
 float** rotate2default(float(*matrix)[3], int rowsNumber)
 {
 	float** result;
-	result = rotateAroundAxis(matrix, -15.0 * M_PI / 180.0, 'y', rowsNumber);
-	return rotateAroundAxis(result, 50.0 * M_PI / 180.0, 'z', rowsNumber);
+	result = rotateAroundAxis(matrix, -10.0 * M_PI / 180.0, 'y', rowsNumber);
+	result = rotateAroundAxis(result, 5.0 * M_PI / 180.0, 'x', rowsNumber);
+	return rotateAroundAxis(result, 45.0 * M_PI / 180.0, 'z', rowsNumber);
 }

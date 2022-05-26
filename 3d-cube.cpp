@@ -1,11 +1,13 @@
 ﻿#include <iostream>
 
 #include "mathtransform.h"
+#include "graphicengine.h"
 
 using namespace std;
 
 int main()
 {
+    /*
     cout << "Hello World!\n";
     float a[1][3] = { 5,5,5};
     float b[3][1] = { {1.1},{2.1},{3.1} };
@@ -21,11 +23,10 @@ int main()
         for (int j = 0; j < 3;j++)
             cout << result[i][j] << " ";
 
-
-
-
-
-    delete[] result;
+    delete[] result;*/
+    
+    StartWindow();
+    return 0;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
