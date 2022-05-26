@@ -7,20 +7,23 @@ using namespace std;
 int main()
 {
     cout << "Hello World!\n";
-    float a[1][3] = { 1.1,1.2,1.3};
+    float a[1][3] = { 5,5,5};
     float b[3][1] = { {1.1},{2.1},{3.1} };
     float c[3][3];
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++)
             c[i][j] = i + j;
     }
-    cout << a[0][2] << endl;
-    cout << b[2][0] << endl;
-    float **result = multiplyMatrices(a, c, 1, 3);
+    
+    float oldDot1[1][3] = { 5, 5, 5 };
+    float** result = rotate2default(oldDot1, 1);
     for (int i = 0; i < 1; i++)
-        for (int j = 0; j < 1;j++)
+        for (int j = 0; j < 3;j++)
             cout << result[i][j] << " ";
-    float** matr = multiplyMatrices(result, b, 1, 1);
+
+
+
+
 
     delete[] result;
 }
