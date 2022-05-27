@@ -27,7 +27,12 @@ float** multiplyMatrices(float **matrix1, float**matrix2, int rowsNumber, int co
 			}
 		}
 	}
-
+	for (int i = 0;i < rowsNumber;i++)
+		delete[] matrix1[i];
+	delete[] matrix1;
+	for (int i = 0;i < 3;i++)
+		delete[] matrix2[i];
+	delete[] matrix2;
 	return result;
 }
 
@@ -51,6 +56,9 @@ float** multiplyMatrices(float(*matrix1)[3], float** matrix2, int rowsNumber, in
 			}
 		}
 	}
+	for (int i = 0;i < 3;i++)
+		delete[] matrix2[i];
+	delete[] matrix2;
 	return result;
 }
 
@@ -74,6 +82,9 @@ float** multiplyMatrices(float** matrix1, float(*matrix2)[3], int rowsNumber, in
 			}
 		}
 	}
+	for (int i = 0;i < rowsNumber;i++)
+		delete[] matrix1[i];
+	delete[] matrix1;
 	return result;
 }
 
@@ -97,7 +108,9 @@ float** multiplyMatrices(float** matrix1, float(*matrix2)[1], int rowsNumber, in
 			}
 		}
 	}
-
+	for (int i = 0;i < rowsNumber;i++)
+		delete[] matrix1[i];
+	delete[] matrix1;
 	return result;
 }
 
@@ -121,7 +134,6 @@ float** multiplyMatrices(float (*matrix1)[3], float (*matrix2)[3], int rowsNumbe
 			}
 		}
 	}
-	
 	return result;
 }
 
@@ -145,7 +157,6 @@ float** multiplyMatrices(float(*matrix1)[3], float(*matrix2)[1], int rowsNumber,
 			}
 		}
 	}
-
 	return result;
 }
 
@@ -224,8 +235,7 @@ float** rotateAroundAxisNew(float** matrix, float angle, char axis, int rowsNumb
 	else {
 		return nullptr;
 	}
-	matrix = multiplyMatrices(matrix, transitionMatrix2old, rowsNumber, 3);
-	return matrix;
+	return multiplyMatrices(matrix, transitionMatrix2old, rowsNumber, 3);
 }
 
 float** rotateAroundAxisNew(float(*matrix)[3], float angle, char axis, int rowsNumber)
