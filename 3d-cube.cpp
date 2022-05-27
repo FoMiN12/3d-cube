@@ -55,13 +55,15 @@ int main()
     dots[5] = dot6;
     dots[6] = dot7;
     dots[7] = dot8;
+    cout << dot1.screenPosition.x << " ";
+    cout << dot7.screenPosition.x << endl;
 
-    Quadrilateral edge1(dot1, dot2, dot3, dot4, sf::Color::Blue);
-    Quadrilateral edge2(dot1, dot2, dot6, dot5, sf::Color::Cyan);
-    Quadrilateral edge3(dot2, dot3, dot7, dot6, sf::Color::Green);
-    Quadrilateral edge4(dot3, dot4, dot8, dot7, sf::Color::Magenta);
-    Quadrilateral edge5(dot1, dot5, dot8, dot4, sf::Color::Red);
-    Quadrilateral edge6(dot5, dot6, dot7, dot8, sf::Color::White);
+    Quadrilateral edge1(dot1, dot2, dot3, dot4);
+    Quadrilateral edge2(dot1, dot2, dot6, dot5);
+    Quadrilateral edge3(dot2, dot3, dot7, dot6);
+    Quadrilateral edge4(dot3, dot4, dot8, dot7);
+    Quadrilateral edge5(dot1, dot5, dot8, dot4);
+    Quadrilateral edge6(dot5, dot6, dot7, dot8);
 
     Quadrilateral* edges = new Quadrilateral[6];
     edges[0] = edge1;
@@ -71,19 +73,51 @@ int main()
     edges[4] = edge5;
     edges[5] = edge6;
 
+    for (int i = 0;i < 6;i++)
+        cout << edges[i].vertexes[0].screenPosition.x << ' ';
+    cout << endl;
 
+    Qube qube(edges );
 
-    sf::VertexArray triangle(sf::Quads, 4);
+    for (int i = 0;i < 6;i++)
+        cout << qube.edges[i].vertexes[0].screenPosition.x << ' ';
+    cout << endl;
+
+    sf::VertexArray side1(sf::Quads, 4);
+    sf::VertexArray side2(sf::Quads, 4);
+    sf::VertexArray side3(sf::Quads, 4);
+    sf::VertexArray side4(sf::Quads, 4);
+    sf::VertexArray side5(sf::Quads, 4);
+    sf::VertexArray side6(sf::Quads, 4);
+
+    for (int i = 0; i < 4; i++)
+        side1[i].color = sf::Color::Blue;
+    for (int i = 0; i < 4; i++)
+        side1[i].color = sf::Color::Cyan;
+    for (int i = 0; i < 4; i++)
+        side1[i].color = sf::Color::Green;
+    for (int i = 0; i < 4; i++)
+        side1[i].color = sf::Color::Magenta;
+    for (int i = 0; i < 4; i++)
+        side1[i].color = sf::Color::Red;
+    for (int i = 0; i < 4; i++)
+        side1[i].color = sf::Color::White;
+    //for (int i = 0; i < 0; i++) {
+   // cout << side1[0].position.x << endl;
+
+    //}
+    /*sf::VertexArray triangle(sf::Quads, 4);
     triangle[0].color = sf::Color::Red;
     triangle[1].color = sf::Color::Blue;
     triangle[2].color = sf::Color::Green;
-    triangle[3].color = sf::Color::Cyan;
+    triangle[3].color = sf::Color::Cyan;*/
 
 
     sf::Clock clock;
     sf::Time elapsed;
 
     float angularVelocity[3] = {0.0,0.0,0.8 };
+   
 
     while (window.isOpen())
     {
@@ -100,31 +134,47 @@ int main()
         window.clear(sf::Color::Black);
 
         // define the position of the triangle's points
-        for (int i = 0;i < 4;i++)
-        {
-            float currentAngularDiv[3] = { angularVelocity[0] * elapsed.asSeconds(), angularVelocity[1] * elapsed.asSeconds(),
+        float currentAngularDiv[3] = { angularVelocity[0] * elapsed.asSeconds(), angularVelocity[1] * elapsed.asSeconds(),
                                            angularVelocity[2] * elapsed.asSeconds() };
-            dots[i].rotate(currentAngularDiv);
-            triangle[i].position = dots[i].screenPosition;
-        }
+        for (int i = 0;i < 6;i++)
+            cout << qube.edges[i].vertexes[0].screenPosition.x << ' ';
+        for (int i = 0;i < 6;i++)
+            qube.edges[i].rotate(currentAngularDiv);
+        //qube.rotate(currentAngularDiv);
+            //dots[i].rotate(currentAngularDiv);
+            //triangle[i].position = dots[i].screenPosition;
+        //}
 
+        
+        for (int i = 0; i < 4; i++)
+            side1[i].position = qube.edges[0].vertexes[i].screenPosition;
+        
+        for (int i = 0; i < 4; i++)
+            side2[i].position = qube.edges[1].vertexes[i].screenPosition;
+        
+        for (int i = 0; i < 4; i++)
+            side3[i].position = qube.edges[2].vertexes[i].screenPosition;
+        
+        for (int i = 0; i < 4; i++)
+            side4[i].position = qube.edges[3].vertexes[i].screenPosition;
+        
+        for (int i = 0; i < 4; i++)
+            side5[i].position = qube.edges[4].vertexes[i].screenPosition;
+        
+        for (int i = 0; i < 4; i++)
+            side6[i].position = qube.edges[5].vertexes[i].screenPosition;
+
+        
         //cout << dot1.screenPosition.y << ' ' << dot2.screenPosition.y << ' ' << dot3.screenPosition.y << ' ';
         // define the color of the triangle's points
-        
-        window.draw(triangle);
+        for (int i = 0;i < 6;i++)
+        {
+            int order = qube.drawOrder[i];
+        //    window.draw(qube.edges[order].shape);
+        }
+        //window.draw(triangle);
 
         window.display();
     }
     return 0;
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.

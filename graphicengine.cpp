@@ -46,28 +46,29 @@ Dot::Dot()
     setThreeD2Screen();
 }
 
-Quadrilateral::Quadrilateral(Dot dot1, Dot dot2, Dot dot3, Dot dot4, sf::Color color)
-{
-    vertexes = new Dot [4];
-    vertexes[0] = dot1;
-    vertexes[1] = dot2;
-    vertexes[2] = dot3;
-    vertexes[3] = dot4;
-    depth = computeDepth();
-
-    sf::VertexArray shape(sf::Quads, 4);
-    for (int i = 0;i < 4;i++) {
-        shape[i].position = vertexes[i].screenPosition;
-        shape[i].color = color;
-    }
-}
-
 float Quadrilateral::computeDepth()
 {
     float sumDepth = 0;
     for (int i = 0;i < 4;i++)
         sumDepth += vertexes[i].depth;
     return sumDepth / 4.0f;
+}
+
+Quadrilateral::Quadrilateral(Dot dot1, Dot dot2, Dot dot3, Dot dot4)
+{
+    vertexes = new Dot[4];
+    vertexes[0] = dot1;
+    vertexes[1] = dot2;
+    vertexes[2] = dot3;
+    vertexes[3] = dot4;
+    depth = computeDepth();
+
+    /*sf::VertexArray figure(sf::Quads, 4);
+    sf::VertexArray shape = figure;
+    for (int i = 0;i < 4;i++) {
+        shape[i].position = vertexes[i].screenPosition;
+        shape[i].color = color;
+    }*/
 }
 
 Quadrilateral::Quadrilateral()
@@ -81,42 +82,31 @@ Quadrilateral::Quadrilateral()
     vertexes[1] = dot2;
     vertexes[2] = dot3;
     vertexes[3] = dot4;
+
     depth = computeDepth();
     
-    sf::VertexArray shape(sf::Quads, 4);
-    for (int i = 0;i < 4;i++) {
-        shape[i].position = vertexes[i].screenPosition;
-        shape[i].color = sf::Color::White;
-    }
-
+    //sf::VertexArray shape(sf::Quads, 4);
+    //for (int i = 0;i < 4;i++) {
+    //    shape[i].position = vertexes[i].screenPosition;
+    //    shape[i].color = sf::Color::White;
+    //}
 }
 
-void Quadrilateral::updatePosition()
+/*void Quadrilateral::updatePosition()
 {
     for (int i = 0;i < 4;i++)
+    {
         shape[i].position = vertexes[i].screenPosition;
-    computeDepth();
-}
-
-void Quadrilateral::setColor(sf::Color color)
-{
-    for (int i = 0;i < 4;i++) {
-        shape[i].color = color;
     }
-}
+    computeDepth();
+}*/
+
 
 void Quadrilateral::rotate(float angles[3])
 {
     for (int i = 0;i < 4;i++)
         vertexes[i].rotate(angles);
-    updatePosition();
-}
-
-Qube::Qube(Quadrilateral* quadrilaterals)
-{
-    edges = new Quadrilateral[6];
-    for (int i = 0;i < 6;i++)
-        edges[i] = quadrilaterals[i];
+    
 }
 
 void Qube::rotate(float angles[3])
@@ -124,3 +114,44 @@ void Qube::rotate(float angles[3])
     for (int i = 0;i < 6;i++)
         edges[i].rotate(angles);
 }
+
+Qube::Qube(Quadrilateral* quadrilaterals)
+{
+    edges = new Quadrilateral[6];
+    for (int i = 0;i < 6;i++) {
+        edges[i] = quadrilaterals[i];
+        drawOrder[i] = i;
+    }
+}
+
+Qube::Qube(Quadrilateral q1, Quadrilateral q2, Quadrilateral q3, Quadrilateral q4, Quadrilateral q5, Quadrilateral q6 )
+{
+    edges = new Quadrilateral[6];
+    
+    edges[0] = q1;
+    edges[1] = q2;
+    edges[2] = q3;
+    edges[3] = q4;
+    edges[4] = q5;
+    edges[5] = q6;
+    for (int i = 0;i < 6;i++) {
+        drawOrder[i] = i;
+    }
+}
+
+void Qube::updateDrawOrder()
+{
+    float minimum, a;
+    for (int i = 0; i < 6; i++) {
+        minimum = edges[i].depth;
+        for (int j = i + 1;j < 6;j++) {
+            a = edges[j].depth;
+            if (a < minimum) {
+                drawOrder[j] = i;
+                drawOrder[i] = j;
+                minimum = edges[j].depth;
+            }
+        }
+    }
+}
+

@@ -31,12 +31,11 @@ class Quadrilateral
 public:
 	Dot* vertexes;
 	float depth;
-	sf::VertexArray shape;
 	
-	Quadrilateral(Dot, Dot, Dot, Dot, sf::Color);
+	Quadrilateral(Dot, Dot, Dot, Dot);
 	Quadrilateral();
 	float computeDepth();
-	void updatePosition();
+	
 	void rotate(float[3]);
 	void setColor(sf::Color);
 
@@ -47,17 +46,20 @@ private:
 class Qube
 {
 public:
-	Quadrilateral *edges;
-
+	Quadrilateral* edges;
+	int drawOrder[6];
 	Qube(Quadrilateral*);
+	Qube(Quadrilateral, Quadrilateral, Quadrilateral, Quadrilateral, Quadrilateral, Quadrilateral);
 
 	void rotate(float[3]);
 
+	void updateDrawOrder();
 
 
 private:
 
 };
+
 
 
 
