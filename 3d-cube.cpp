@@ -34,8 +34,10 @@ int main()
     for (int i = 0;i < 3;i++) {
         cout << e3[0][i] << endl;
     }*/
+    sf::ContextSettings settings;
+    settings.antialiasingLevel = 8;
 
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Cube window");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Cube window", sf::Style::Default, settings);
     Dot* dots = new Dot[8];
     Dot dot1(200.f, -200.f, -200.f);
     Dot dot2(-200.f, -200.f, -200.f);
@@ -64,7 +66,7 @@ int main()
     sf::Clock clock;
     sf::Time elapsed;
 
-    float angularVelocity[3] = { 0.15,0.15,0.15 };
+    float angularVelocity[3] = { 0.2,0.2,0.2 };
 
     while (window.isOpen())
     {
