@@ -144,7 +144,7 @@ float** multiplyMatrices(float(*matrix1)[3], float(*matrix2)[1], int rowsNumber,
 	return result;
 }
 
-float** rotateAroundAxis(float** matrix, float angle, char axis, int rowsNumber)
+float** rotateAroundAxisOld(float** matrix, float angle, char axis, int rowsNumber)
 {
 	if (axis == 'x') {
 		float rotationMatrix[3][3] = { {1, 0, 0},
@@ -169,7 +169,7 @@ float** rotateAroundAxis(float** matrix, float angle, char axis, int rowsNumber)
 	}
 }
 
-float** rotateAroundAxis(float(*matrix)[3], float angle, char axis, int rowsNumber)
+float** rotateAroundAxisOld(float(*matrix)[3], float angle, char axis, int rowsNumber)
 {
 	if (axis == 'x') {
 		float rotationMatrix[3][3] = { {1, 0, 0},
@@ -194,18 +194,74 @@ float** rotateAroundAxis(float(*matrix)[3], float angle, char axis, int rowsNumb
 	}
 }
 
+float** rotateAroundAxisNew(float** matrix, float angle, char axis, int rowsNumber)
+{
+	matrix = multiplyMatrices(matrix, transitionMatrix2new, rowsNumber, 3);
+	if (axis == 'x') {
+		float rotationMatrix[3][3] = { {1, 0, 0},
+									   {0, cos(angle), -sin(angle)},
+									   {0, sin(angle), cos(angle)}, };
+		matrix = multiplyMatrices(matrix, rotationMatrix, rowsNumber, 3);
+		
+	}
+	else if (axis == 'y') {
+		float rotationMatrix[3][3] = { {cos(angle), 0, sin(angle)},
+										{0, 1, 0},
+										{-sin(angle), 0, cos(angle)} };
+		matrix = multiplyMatrices(matrix, rotationMatrix, rowsNumber, 3);
+	}
+	else if (axis == 'z') {
+		float rotationMatrix[3][3] = { {cos(angle), -sin(angle), 0},
+										{sin(angle), cos(angle), 0},
+										{0, 0, 1} };
+		matrix = multiplyMatrices(matrix, rotationMatrix, rowsNumber, 3);
+	}
+	else {
+		return nullptr;
+	}
+	return multiplyMatrices(matrix, transitionMatrix2old, rowsNumber, 3);
+}
+
+float** rotateAroundAxisNew(float(*matrix)[3], float angle, char axis, int rowsNumber)
+{
+	float** Matrix = multiplyMatrices(matrix, transitionMatrix2new, rowsNumber, 3);
+	if (axis == 'x') {
+		float rotationMatrix[3][3] = { {1, 0, 0},
+									   {0, cos(angle), -sin(angle)},
+									   {0, sin(angle), cos(angle)}, };
+		Matrix = multiplyMatrices(Matrix, rotationMatrix, rowsNumber, 3);
+
+	}
+	else if (axis == 'y') {
+		float rotationMatrix[3][3] = { {cos(angle), 0, sin(angle)},
+										{0, 1, 0},
+										{-sin(angle), 0, cos(angle)} };
+		Matrix = multiplyMatrices(Matrix, rotationMatrix, rowsNumber, 3);
+	}
+	else if (axis == 'z') {
+		float rotationMatrix[3][3] = { {cos(angle), -sin(angle), 0},
+										{sin(angle), cos(angle), 0},
+										{0, 0, 1} };
+		Matrix = multiplyMatrices(Matrix, rotationMatrix, rowsNumber, 3);
+	}
+	else {
+		return nullptr;
+	}
+	return multiplyMatrices(Matrix, transitionMatrix2old, rowsNumber, 3);
+}
+
 float** rotate2default(float** matrix, int rowsNumber)
 {
 	float** result;
-	result = rotateAroundAxis(matrix, -10.0 * M_PI / 180.0, 'y', rowsNumber);
-	result = rotateAroundAxis(result, 5.0 * M_PI / 180.0, 'x', rowsNumber);
-	return rotateAroundAxis(result, 45.0 * M_PI / 180.0, 'z', rowsNumber);
+	result = rotateAroundAxisOld(matrix, -10.0 * M_PI / 180.0, 'y', rowsNumber);
+	result = rotateAroundAxisOld(result, 5.0 * M_PI / 180.0, 'x', rowsNumber);
+	return rotateAroundAxisOld(result, 45.0 * M_PI / 180.0, 'z', rowsNumber);
 }
 
 float** rotate2default(float(*matrix)[3], int rowsNumber)
 {
 	float** result;
-	result = rotateAroundAxis(matrix, -10.0 * M_PI / 180.0, 'y', rowsNumber);
-	result = rotateAroundAxis(result, 5.0 * M_PI / 180.0, 'x', rowsNumber);
-	return rotateAroundAxis(result, 45.0 * M_PI / 180.0, 'z', rowsNumber);
+	result = rotateAroundAxisOld(matrix, -10.0 * M_PI / 180.0, 'y', rowsNumber);
+	result = rotateAroundAxisOld(result, 5.0 * M_PI / 180.0, 'x', rowsNumber);
+	return rotateAroundAxisOld(result, 45.0 * M_PI / 180.0, 'z', rowsNumber);
 }
