@@ -56,17 +56,34 @@ int main()
     dots[6] = dot7;
     dots[7] = dot8;
 
+    Quadrilateral edge1(dot1, dot2, dot3, dot4, sf::Color::Blue);
+    Quadrilateral edge2(dot1, dot2, dot6, dot5, sf::Color::Cyan);
+    Quadrilateral edge3(dot2, dot3, dot7, dot6, sf::Color::Green);
+    Quadrilateral edge4(dot3, dot4, dot8, dot7, sf::Color::Magenta);
+    Quadrilateral edge5(dot1, dot5, dot8, dot4, sf::Color::Red);
+    Quadrilateral edge6(dot5, dot6, dot7, dot8, sf::Color::White);
+
+    Quadrilateral* edges = new Quadrilateral[6];
+    edges[0] = edge1;
+    edges[1] = edge2;
+    edges[2] = edge3;
+    edges[3] = edge4;
+    edges[4] = edge5;
+    edges[5] = edge6;
+
+
+
     sf::VertexArray triangle(sf::Quads, 4);
     triangle[0].color = sf::Color::Red;
     triangle[1].color = sf::Color::Blue;
     triangle[2].color = sf::Color::Green;
-    triangle[3].color = sf::Color::Blue;
+    triangle[3].color = sf::Color::Cyan;
 
 
     sf::Clock clock;
     sf::Time elapsed;
 
-    float angularVelocity[3] = { 0.2,0.2,0.2 };
+    float angularVelocity[3] = {0.0,0.0,0.8 };
 
     while (window.isOpen())
     {
@@ -85,7 +102,9 @@ int main()
         // define the position of the triangle's points
         for (int i = 0;i < 4;i++)
         {
-            dots[i].rotate(elapsed.asSeconds() * angularVelocity[2], 'z');
+            float currentAngularDiv[3] = { angularVelocity[0] * elapsed.asSeconds(), angularVelocity[1] * elapsed.asSeconds(),
+                                           angularVelocity[2] * elapsed.asSeconds() };
+            dots[i].rotate(currentAngularDiv);
             triangle[i].position = dots[i].screenPosition;
         }
 

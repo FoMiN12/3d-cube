@@ -157,6 +157,7 @@ float** multiplyMatrices(float(*matrix1)[3], float(*matrix2)[1], int rowsNumber,
 			}
 		}
 	}
+	
 	return result;
 }
 
@@ -271,6 +272,8 @@ float** rotate2default(float** matrix, int rowsNumber)
 	float** result;
 	result = rotateAroundAxisOld(matrix, -10.0 * M_PI / 180.0, 'y', rowsNumber);
 	result = rotateAroundAxisOld(result, 5.0 * M_PI / 180.0, 'x', rowsNumber);
+
+	delete[] matrix;
 	return rotateAroundAxisOld(result, 45.0 * M_PI / 180.0, 'z', rowsNumber);
 }
 
