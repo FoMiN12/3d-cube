@@ -10,27 +10,26 @@ using namespace std;
 class Dot
 {
 public:
-	Dot(float coordinates[1][3]);
-
 	sf::Vector2f screenPosition;
 	float depth;
 	float** threeDPosition;
+
+	Dot(float coordinates[1][3]);
 	Dot(float x, float y, float z);
+	Dot();
 	
 	
 	void setThreeD2Screen();
+	void rotate(float, char);
 
 private:
 
-	
 	
 
 };
 
 
 
-
-void StartWindow();
 
 
 

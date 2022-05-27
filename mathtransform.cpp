@@ -1,5 +1,12 @@
 #include "mathtransform.h"
 
+float transitionMatrix2new[3][3] = { { 0.685663, 0.704416, 0.183480},
+									 {-0.707066, 0.704416, -0.0620957},
+									 { -0.172987, -0.0871557, 0.981060} };
+float transitionMatrix2old[3][3] = { { 0.6856623, -0.7070656, -0.1729874},
+									 {0.7044159, 0.7044161, -0.0871557},
+									 { 0.1834796, -0.0620953, -0.9810605} };
+
 float** multiplyMatrices(float **matrix1, float**matrix2, int rowsNumber, int columnsNumber)
 {
 	float** result;
@@ -44,7 +51,6 @@ float** multiplyMatrices(float(*matrix1)[3], float** matrix2, int rowsNumber, in
 			}
 		}
 	}
-
 	return result;
 }
 
@@ -68,7 +74,6 @@ float** multiplyMatrices(float** matrix1, float(*matrix2)[3], int rowsNumber, in
 			}
 		}
 	}
-
 	return result;
 }
 
@@ -219,7 +224,8 @@ float** rotateAroundAxisNew(float** matrix, float angle, char axis, int rowsNumb
 	else {
 		return nullptr;
 	}
-	return multiplyMatrices(matrix, transitionMatrix2old, rowsNumber, 3);
+	matrix = multiplyMatrices(matrix, transitionMatrix2old, rowsNumber, 3);
+	return matrix;
 }
 
 float** rotateAroundAxisNew(float(*matrix)[3], float angle, char axis, int rowsNumber)
