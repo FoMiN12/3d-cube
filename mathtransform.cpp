@@ -21,7 +21,7 @@ float** multiplyMatrices(float **matrix1, float**matrix2, int rowsNumber, int co
 	}
 
 	for (int i = 0;i < rowsNumber;i++) {
-		for (int j = 0;j < 3; j++) {
+		for (int j = 0;j < columnsNumber; j++) {
 			for (int x = 0;x < 3; x++) {
 				result[i][j] += matrix1[i][x] * matrix2[x][j];
 			}
@@ -50,7 +50,7 @@ float** multiplyMatrices(float(*matrix1)[3], float** matrix2, int rowsNumber, in
 	}
 
 	for (int i = 0;i < rowsNumber;i++) {
-		for (int j = 0;j < 3; j++) {
+		for (int j = 0;j < columnsNumber; j++) {
 			for (int x = 0;x < 3; x++) {
 				result[i][j] += matrix1[i][x] * matrix2[x][j];
 			}
@@ -76,7 +76,7 @@ float** multiplyMatrices(float** matrix1, float(*matrix2)[3], int rowsNumber, in
 	}
 
 	for (int i = 0;i < rowsNumber;i++) {
-		for (int j = 0;j < rowsNumber; j++) {
+		for (int j = 0;j < columnsNumber; j++) {
 			for (int x = 0;x < 3; x++) {
 				result[i][j] += matrix1[i][x] * matrix2[x][j];
 			}
@@ -102,7 +102,7 @@ float** multiplyMatrices(float** matrix1, float(*matrix2)[1], int rowsNumber, in
 	}
 
 	for (int i = 0;i < rowsNumber;i++) {
-		for (int j = 0;j < 3; j++) {
+		for (int j = 0;j < columnsNumber; j++) {
 			for (int x = 0;x < 3; x++) {
 				result[i][j] += matrix1[i][x] * matrix2[x][j];
 			}
@@ -128,7 +128,7 @@ float** multiplyMatrices(float (*matrix1)[3], float (*matrix2)[3], int rowsNumbe
 	}
 
 	for (int i = 0;i < rowsNumber;i++) {
-		for (int j = 0;j < 3; j++) {
+		for (int j = 0;j < columnsNumber; j++) {
 			for (int x = 0;x < 3; x++) {
 				result[i][j] += matrix1[i][x] * matrix2[x][j];
 			}
@@ -151,7 +151,7 @@ float** multiplyMatrices(float(*matrix1)[3], float(*matrix2)[1], int rowsNumber,
 	}
 
 	for (int i = 0;i < rowsNumber;i++) {
-		for (int j = 0;j < 3; j++) {
+		for (int j = 0;j < columnsNumber; j++) {
 			for (int x = 0;x < 3; x++) {
 				result[i][j] += matrix1[i][x] * matrix2[x][j];
 			}
