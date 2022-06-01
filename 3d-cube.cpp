@@ -93,15 +93,15 @@ int main()
     for (int i = 0; i < 4; i++)
         side1[i].color = sf::Color::Blue;
     for (int i = 0; i < 4; i++)
-        side1[i].color = sf::Color::Cyan;
+        side2[i].color = sf::Color::Cyan;
     for (int i = 0; i < 4; i++)
-        side1[i].color = sf::Color::Green;
+        side3[i].color = sf::Color::Green;
     for (int i = 0; i < 4; i++)
-        side1[i].color = sf::Color::Magenta;
+        side4[i].color = sf::Color::Magenta;
     for (int i = 0; i < 4; i++)
-        side1[i].color = sf::Color::Red;
+        side5[i].color = sf::Color::Red;
     for (int i = 0; i < 4; i++)
-        side1[i].color = sf::Color::White;
+        side6[i].color = sf::Color::White;
     //for (int i = 0; i < 0; i++) {
    // cout << side1[0].position.x << endl;
 
