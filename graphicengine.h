@@ -26,14 +26,14 @@ private:
 	float m_zScreen;
 };
 
-class Quadrilateral
+class Side
 {
 public:
 	Dot* vertexes;
 	float depth;
 	
-	Quadrilateral(Dot, Dot, Dot, Dot);
-	Quadrilateral();
+	Side(Dot, Dot, Dot, Dot);
+	Side();
 	float computeDepth();
 	
 	void rotate(float[3]);
@@ -46,10 +46,10 @@ private:
 class Qube
 {
 public:
-	Quadrilateral* edges;
+	Side* edges;
 	int drawOrder[6];
-	Qube(Quadrilateral*);
-	Qube(Quadrilateral, Quadrilateral, Quadrilateral, Quadrilateral, Quadrilateral, Quadrilateral);
+	Qube(Side*);
+	Qube(Side, Side, Side, Side, Side, Side);
 
 	void rotate(float[3]);
 

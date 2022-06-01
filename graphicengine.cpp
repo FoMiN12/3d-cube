@@ -74,7 +74,7 @@ float Dot::getScreenPosition(char axis)
 }
 
 
-float Quadrilateral::computeDepth()
+float Side::computeDepth()
 {
     float sumDepth = 0;
     for (int i = 0;i < 4;i++)
@@ -82,7 +82,7 @@ float Quadrilateral::computeDepth()
     return sumDepth / 4.0f;
 }
 
-Quadrilateral::Quadrilateral(Dot dot1, Dot dot2, Dot dot3, Dot dot4)
+Side::Side(Dot dot1, Dot dot2, Dot dot3, Dot dot4)
 {
     vertexes = new Dot[4];
     vertexes[0] = dot1;
@@ -99,7 +99,7 @@ Quadrilateral::Quadrilateral(Dot dot1, Dot dot2, Dot dot3, Dot dot4)
     }*/
 }
 
-Quadrilateral::Quadrilateral()
+Side::Side()
 {
     vertexes = new Dot[4];
     Dot dot1;
@@ -130,7 +130,7 @@ Quadrilateral::Quadrilateral()
 }*/
 
 
-void Quadrilateral::rotate(float angles[3])
+void Side::rotate(float angles[3])
 {
     for (int i = 0;i < 4;i++)
         vertexes[i].rotate(angles);
@@ -143,18 +143,18 @@ void Qube::rotate(float angles[3])
         edges[i].rotate(angles);
 }
 
-Qube::Qube(Quadrilateral* quadrilaterals)
+Qube::Qube(Side* quadrilaterals)
 {
-    edges = new Quadrilateral[6];
+    edges = new Side[6];
     for (int i = 0;i < 6;i++) {
         edges[i] = quadrilaterals[i];
         drawOrder[i] = i;
     }
 }
 
-Qube::Qube(Quadrilateral q1, Quadrilateral q2, Quadrilateral q3, Quadrilateral q4, Quadrilateral q5, Quadrilateral q6 )
+Qube::Qube(Side q1, Side q2, Side q3, Side q4, Side q5, Side q6 )
 {
-    edges = new Quadrilateral[6];
+    edges = new Side[6];
     
     edges[0] = q1;
     edges[1] = q2;

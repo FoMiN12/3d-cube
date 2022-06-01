@@ -55,17 +55,17 @@ int main()
     dots[5] = dot6;
     dots[6] = dot7;
     dots[7] = dot8;
-    cout << dot1.getScreenPosition('x') << " ";
+   cout << dot1.getScreenPosition('x') << " ";
     cout << dot7.getScreenPosition('x') << endl;
 
-    Quadrilateral edge1(dot1, dot2, dot3, dot4);
-    Quadrilateral edge2(dot1, dot2, dot6, dot5);
-    Quadrilateral edge3(dot2, dot3, dot7, dot6);
-    Quadrilateral edge4(dot3, dot4, dot8, dot7);
-    Quadrilateral edge5(dot1, dot5, dot8, dot4);
-    Quadrilateral edge6(dot5, dot6, dot7, dot8);
+    Side edge1(dot1, dot2, dot3, dot4);
+    Side edge2(dot1, dot2, dot6, dot5);
+    Side edge3(dot2, dot3, dot7, dot6);
+    Side edge4(dot3, dot4, dot8, dot7);
+    Side edge5(dot1, dot5, dot8, dot4);
+    Side edge6(dot5, dot6, dot7, dot8);
 
-    Quadrilateral* edges = new Quadrilateral[6];
+    Side* edges = new Side[6];
     edges[0] = edge1;
     edges[1] = edge2;
     edges[2] = edge3;
@@ -73,15 +73,15 @@ int main()
     edges[4] = edge5;
     edges[5] = edge6;
 
-    for (int i = 0;i < 6;i++)
-        cout << edges[i].vertexes[0].getScreenPosition('x') << ' ';
-    cout << endl;
+    //for (int i = 0;i < 6;i++)
+    //    cout << edges[i].vertexes[0].getScreenPosition('x') << ' ';
+   // cout << endl;
 
     Qube qube(edges );
 
-    for (int i = 0;i < 6;i++)
-        cout << qube.edges[i].vertexes[0].getScreenPosition('x') << ' ';
-    cout << endl;
+    //for (int i = 0;i < 6;i++)
+    //    cout << qube.edges[i].vertexes[0].getScreenPosition('x') << ' ';
+    //cout << endl;
 
     sf::VertexArray side1(sf::Quads, 4);
     sf::VertexArray side2(sf::Quads, 4);
@@ -136,8 +136,8 @@ int main()
         // define the position of the triangle's points
         float currentAngularDiv[3] = { angularVelocity[0] * elapsed.asSeconds(), angularVelocity[1] * elapsed.asSeconds(),
                                            angularVelocity[2] * elapsed.asSeconds() };
-        for (int i = 0;i < 6;i++)
-            cout << qube.edges[i].vertexes[0].getScreenPosition('x') << ' ';
+        //for (int i = 0;i < 6;i++)
+        //    cout << qube.edges[i].vertexes[0].getScreenPosition('x') << ' ';
         for (int i = 0;i < 6;i++)
             qube.edges[i].rotate(currentAngularDiv);
         //qube.rotate(currentAngularDiv);
