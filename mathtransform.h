@@ -24,5 +24,6 @@ float** rotateAroundAxisNew(float(*)[3], float, char, int);
 
 float** rotate2default(float**, int);
 float** rotate2default(float(*)[3], int);
+float** rotate2default(float[1][3], int);
 
 #endif

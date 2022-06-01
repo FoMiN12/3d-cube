@@ -7,33 +7,6 @@ using namespace std;
 int main()
 {
     
-    /*cout << "Hello World!\n";
-    float a[1][3] = { 5,5,5};
-    float b[3][1] = { {1.1},{2.1},{3.1} };
-    float c[3][3];
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++)
-            c[i][j] = i + j;
-    }
-    
-    float oldDot1[1][3] = { 5, 5, 5 };
-    float** result = rotate2default(oldDot1, 1);
-    for (int i = 0; i < 1; i++)
-        for (int j = 0; j < 3;j++)
-            cout << result[i][j] << " ";
-
-    delete[] result;*/
-    
-    /*float a1[1][3] = {1,0,0};
-    float a2[1][3] = { 0,1,0 };
-    float  a3[1][3] = { 0,0,1 };
-    float** e1 = rotate2default(a1, 1);
-    float** e2 = rotate2default(a2, 1);
-    float** e3 = rotate2default(a3, 1);
-
-    for (int i = 0;i < 3;i++) {
-        cout << e3[0][i] << endl;
-    }*/
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
 
@@ -136,15 +109,8 @@ int main()
         // define the position of the triangle's points
         float currentAngularDiv[3] = { angularVelocity[0] * elapsed.asSeconds(), angularVelocity[1] * elapsed.asSeconds(),
                                            angularVelocity[2] * elapsed.asSeconds() };
-        //for (int i = 0;i < 6;i++)
-        //    cout << qube.edges[i].vertexes[0].getScreenPosition('x') << ' ';
         for (int i = 0;i < 6;i++)
             qube.edges[i].rotate(currentAngularDiv);
-        //qube.rotate(currentAngularDiv);
-            //dots[i].rotate(currentAngularDiv);
-            //triangle[i].position = dots[i].screenPosition;
-        //}
-
         
         for (int i = 0; i < 4; i++) {
             side1[i].position.x = qube.edges[0].vertexes[i].getScreenPosition('x');
@@ -178,7 +144,7 @@ int main()
         for (int i = 0;i < 6;i++)
         {
             int order = qube.drawOrder[i];
-        //    window.draw(qube.edges[order].shape);
+            window.draw(qube.edges[order]);
         }
         //window.draw(triangle);
 

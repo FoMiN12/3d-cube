@@ -15,6 +15,13 @@ Dot::Dot(float x, float y, float z)
     coordinates3D[0][0] = x;
     coordinates3D[0][1] = y;
     coordinates3D[0][2] = z;
+
+    float** result = rotate2default(coordinates3D, 1);
+    for (int i = 0; i < 3; i++)
+        coordinates3D[0][i] = result[0][i];
+    delete[] result[0];
+    delete[] result;
+
     set3D2Screen();
 }
 
@@ -23,8 +30,13 @@ Dot::Dot(float coordinates[1][3])
     m_xScreen = 0;
     m_yScreen = 0;
     m_zScreen = 0;
+
+    float** result = rotate2default(coordinates, 1);
     for (int i = 0; i < 3; i++)
-        coordinates3D[0][i] = coordinates[0][i];
+        coordinates3D[0][i] = result[0][i];
+    delete[] result[0];
+    delete[] result;
+
     set3D2Screen();
 }
 
@@ -36,6 +48,7 @@ Dot::Dot()
     coordinates3D[0][0] = 0;
     coordinates3D[0][1] = 0;
     coordinates3D[0][2] = 0;
+
     set3D2Screen();
 }
 
@@ -44,10 +57,12 @@ void Dot::rotate(float angles[3])
     float **result = rotateAroundAxisNew(coordinates3D, angles[0], 'x', 1);
     result = rotateAroundAxisNew(result, angles[1], 'y', 1);
     result = rotateAroundAxisNew(result, angles[2], 'z', 1);
+
     for (int i = 0; i < 3; i++)
         coordinates3D[0][i] = result[0][i];
     delete[] result[0];
     delete[] result;
+
     set3D2Screen();
 }
 
@@ -98,11 +113,25 @@ float Side::computeDepth()
 
 Side::Side(Dot dot1, Dot dot2, Dot dot3, Dot dot4)
 {
+    m_vertices.setPrimitiveType(sf::Quads);
+    m_vertices.resize(4);
+
+    setColor(sf::Color::White);
+
     vertexes = new Dot[4];
     vertexes[0] = dot1;
     vertexes[1] = dot2;
     vertexes[2] = dot3;
     vertexes[3] = dot4;
+    m_vertices[0].position.x = dot1.getScreenPosition('x');
+    m_vertices[0].position.y = dot1.getScreenPosition('y');
+    m_vertices[1].position.x = dot2.getScreenPosition('x');
+    m_vertices[1].position.y = dot2.getScreenPosition('y');
+    m_vertices[2].position.x = dot3.getScreenPosition('x');
+    m_vertices[2].position.y = dot3.getScreenPosition('y');
+    m_vertices[3].position.x = dot4.getScreenPosition('x');
+    m_vertices[3].position.y = dot4.getScreenPosition('y');
+
     depth = computeDepth();
 
     /*sf::VertexArray figure(sf::Quads, 4);
@@ -115,6 +144,11 @@ Side::Side(Dot dot1, Dot dot2, Dot dot3, Dot dot4)
 
 Side::Side()
 {
+    m_vertices.setPrimitiveType(sf::Quads);
+    m_vertices.resize(4);
+
+    setColor(sf::Color::White);
+
     vertexes = new Dot[4];
     Dot dot1;
     Dot dot2;
@@ -124,6 +158,14 @@ Side::Side()
     vertexes[1] = dot2;
     vertexes[2] = dot3;
     vertexes[3] = dot4;
+    m_vertices[0].position.x = dot1.getScreenPosition('x');
+    m_vertices[0].position.y = dot1.getScreenPosition('y');
+    m_vertices[1].position.x = dot2.getScreenPosition('x');
+    m_vertices[1].position.y = dot2.getScreenPosition('y');
+    m_vertices[2].position.x = dot3.getScreenPosition('x');
+    m_vertices[2].position.y = dot3.getScreenPosition('y');
+    m_vertices[3].position.x = dot4.getScreenPosition('x');
+    m_vertices[3].position.y = dot4.getScreenPosition('y');
 
     depth = computeDepth();
     
@@ -142,7 +184,11 @@ Side::Side()
     }
     computeDepth();
 }*/
-
+void Side::setColor(sf::Color color)
+{
+    for (int i = 0;i < 4;i++)
+        m_vertices[i].color = color;
+}
 
 void Side::rotate(float angles[3])
 {
