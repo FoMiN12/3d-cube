@@ -16,7 +16,10 @@ public:
 
 	void set3D2Screen();
 	void rotate(float[3]);
+
 	float getScreenPosition(char);
+	void set3DPosition(float, float, float);
+	void set3DPosition(float(*)[3]);
 
 private:
 	float coordinates3D[1][3];

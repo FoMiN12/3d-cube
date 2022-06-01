@@ -73,6 +73,20 @@ float Dot::getScreenPosition(char axis)
     return result;
 }
 
+void Dot::set3DPosition(float coordinates[1][3])
+{
+    for (int i = 0;i < 3;i++)
+        coordinates3D[0][i] = coordinates[0][i];
+    set3D2Screen();
+}
+
+void Dot::set3DPosition(float x, float y, float z)
+{
+    coordinates3D[0][0] = x;
+    coordinates3D[0][1] = y;
+    coordinates3D[0][2] = z;
+    set3D2Screen();
+}
 
 float Side::computeDepth()
 {
