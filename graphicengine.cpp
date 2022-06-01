@@ -1,56 +1,84 @@
 #include "graphicengine.h"
 
-void Dot::setThreeD2Screen()
+void Dot::set3D2Screen()
 {
-    screenPosition.x = 400.f + threeDPosition[0][1];
-    screenPosition.y = 300.f - threeDPosition[0][2];
-    depth = threeDPosition[0][0];
-}
-void Dot::rotate(float angles[3])
-{
-    threeDPosition = rotateAroundAxisNew(threeDPosition, angles[0], 'x', 1);
-    threeDPosition = rotateAroundAxisNew(threeDPosition, angles[1], 'y', 1);
-    threeDPosition = rotateAroundAxisNew(threeDPosition, angles[2], 'z', 1);
-    setThreeD2Screen();
-
-}
-Dot::Dot(float coordinates[1][3])
-{
-    /*threeDPosition = new float*;
-    threeDPosition[0] = new float[3];
-    for (int i = 0; i < 3;i++) {
-        threeDPosition[0][i] = coordinates[0][i];
-    }*/
-    threeDPosition = rotate2default(coordinates, 1);
-    setThreeD2Screen();
+    m_xScreen = 400.f + coordinates3D[0][1];
+    m_yScreen = 300.f - coordinates3D[0][2];
+    m_zScreen = coordinates3D[0][0];
 }
 
 Dot::Dot(float x, float y, float z)
 {
-    float coordinates[1][3] = { x,y,z };
-    threeDPosition = rotate2default(coordinates, 1);
-    /*threeDPosition = new float*;
-    threeDPosition[0] = new float[3];
+    m_xScreen = 0;
+    m_yScreen = 0;
+    m_zScreen = 0;
+    coordinates3D[0][0] = x;
+    coordinates3D[0][1] = y;
+    coordinates3D[0][2] = z;
+    set3D2Screen();
+}
 
-    threeDPosition[0][0] = x;
-    threeDPosition[0][1] = y;
-    threeDPosition[0][2] = z;*/
-
-    setThreeD2Screen();
+Dot::Dot(float coordinates[1][3])
+{
+    m_xScreen = 0;
+    m_yScreen = 0;
+    m_zScreen = 0;
+    for (int i = 0; i < 3; i++)
+        coordinates3D[0][i] = coordinates[0][i];
+    set3D2Screen();
 }
 
 Dot::Dot()
 {
-    float coordinates[1][3] = { 0,0,0 };
-    threeDPosition = rotate2default(coordinates, 1);
-    setThreeD2Screen();
+    m_xScreen = 0;
+    m_yScreen = 0;
+    m_zScreen = 0;
+    coordinates3D[0][0] = 0;
+    coordinates3D[0][1] = 0;
+    coordinates3D[0][2] = 0;
+    set3D2Screen();
 }
+
+void Dot::rotate(float angles[3])
+{
+    float **result = rotateAroundAxisNew(coordinates3D, angles[0], 'x', 1);
+    result = rotateAroundAxisNew(result, angles[1], 'y', 1);
+    result = rotateAroundAxisNew(result, angles[2], 'z', 1);
+    for (int i = 0; i < 3; i++)
+        coordinates3D[0][i] = result[0][i];
+    delete[] result[0];
+    delete[] result;
+    set3D2Screen();
+}
+
+float Dot::getScreenPosition(char axis)
+{
+    float result;
+    switch (axis) {
+        case 'x' :
+            result = m_xScreen;
+            break;
+
+        case 'y' :
+            result = m_yScreen;
+            break;
+
+        case 'z' :
+            result = m_zScreen;
+            break;
+
+        default :
+            result = 0;
+    }
+    return result;
+}
+
 
 float Quadrilateral::computeDepth()
 {
     float sumDepth = 0;
     for (int i = 0;i < 4;i++)
-        sumDepth += vertexes[i].depth;
+        sumDepth += vertexes[i].getScreenPosition('z');
     return sumDepth / 4.0f;
 }
 

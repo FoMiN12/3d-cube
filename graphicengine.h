@@ -10,20 +10,20 @@ using namespace std;
 class Dot
 {
 public:
-	sf::Vector2f screenPosition;
-	float depth;
-	float** threeDPosition;
-
-	Dot(float coordinates[1][3]);
 	Dot(float x, float y, float z);
+	Dot(float coordinates[1][3]);
 	Dot();
 
-
-	void setThreeD2Screen();
+	void set3D2Screen();
 	void rotate(float[3]);
+	float getScreenPosition(char);
 
 private:
+	float coordinates3D[1][3];
 
+	float m_xScreen;
+	float m_yScreen;
+	float m_zScreen;
 };
 
 class Quadrilateral

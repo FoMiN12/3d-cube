@@ -55,8 +55,8 @@ int main()
     dots[5] = dot6;
     dots[6] = dot7;
     dots[7] = dot8;
-    cout << dot1.screenPosition.x << " ";
-    cout << dot7.screenPosition.x << endl;
+    cout << dot1.getScreenPosition('x') << " ";
+    cout << dot7.getScreenPosition('x') << endl;
 
     Quadrilateral edge1(dot1, dot2, dot3, dot4);
     Quadrilateral edge2(dot1, dot2, dot6, dot5);
@@ -74,13 +74,13 @@ int main()
     edges[5] = edge6;
 
     for (int i = 0;i < 6;i++)
-        cout << edges[i].vertexes[0].screenPosition.x << ' ';
+        cout << edges[i].vertexes[0].getScreenPosition('x') << ' ';
     cout << endl;
 
     Qube qube(edges );
 
     for (int i = 0;i < 6;i++)
-        cout << qube.edges[i].vertexes[0].screenPosition.x << ' ';
+        cout << qube.edges[i].vertexes[0].getScreenPosition('x') << ' ';
     cout << endl;
 
     sf::VertexArray side1(sf::Quads, 4);
@@ -137,7 +137,7 @@ int main()
         float currentAngularDiv[3] = { angularVelocity[0] * elapsed.asSeconds(), angularVelocity[1] * elapsed.asSeconds(),
                                            angularVelocity[2] * elapsed.asSeconds() };
         for (int i = 0;i < 6;i++)
-            cout << qube.edges[i].vertexes[0].screenPosition.x << ' ';
+            cout << qube.edges[i].vertexes[0].getScreenPosition('x') << ' ';
         for (int i = 0;i < 6;i++)
             qube.edges[i].rotate(currentAngularDiv);
         //qube.rotate(currentAngularDiv);
@@ -146,23 +146,31 @@ int main()
         //}
 
         
-        for (int i = 0; i < 4; i++)
-            side1[i].position = qube.edges[0].vertexes[i].screenPosition;
-        
-        for (int i = 0; i < 4; i++)
-            side2[i].position = qube.edges[1].vertexes[i].screenPosition;
-        
-        for (int i = 0; i < 4; i++)
-            side3[i].position = qube.edges[2].vertexes[i].screenPosition;
-        
-        for (int i = 0; i < 4; i++)
-            side4[i].position = qube.edges[3].vertexes[i].screenPosition;
-        
-        for (int i = 0; i < 4; i++)
-            side5[i].position = qube.edges[4].vertexes[i].screenPosition;
-        
-        for (int i = 0; i < 4; i++)
-            side6[i].position = qube.edges[5].vertexes[i].screenPosition;
+        for (int i = 0; i < 4; i++) {
+            side1[i].position.x = qube.edges[0].vertexes[i].getScreenPosition('x');
+            side1[i].position.y = qube.edges[0].vertexes[i].getScreenPosition('y');
+        }
+        for (int i = 0; i < 4; i++) {
+            side2[i].position.x = qube.edges[0].vertexes[i].getScreenPosition('x');
+            side2[i].position.y = qube.edges[0].vertexes[i].getScreenPosition('y');
+        }
+        for (int i = 0; i < 4; i++) {
+            side3[i].position.x = qube.edges[0].vertexes[i].getScreenPosition('x');
+            side3[i].position.y = qube.edges[0].vertexes[i].getScreenPosition('y');
+        }
+        for (int i = 0; i < 4; i++) {
+            side4[i].position.x = qube.edges[0].vertexes[i].getScreenPosition('x');
+            side4[i].position.y = qube.edges[0].vertexes[i].getScreenPosition('y');
+        }
+        for (int i = 0; i < 4; i++) {
+            side5[i].position.x = qube.edges[0].vertexes[i].getScreenPosition('x');
+            side5[i].position.y = qube.edges[0].vertexes[i].getScreenPosition('y');
+        }
+        for (int i = 0; i < 4; i++) {
+            side6[i].position.x = qube.edges[0].vertexes[i].getScreenPosition('x');
+            side6[i].position.y = qube.edges[0].vertexes[i].getScreenPosition('y');
+        }
+
 
         
         //cout << dot1.screenPosition.y << ' ' << dot2.screenPosition.y << ' ' << dot3.screenPosition.y << ' ';
