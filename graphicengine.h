@@ -41,6 +41,7 @@ public:
 	
 	void rotate(float[3]);
 	void setColor(sf::Color);
+	void updateVertices();
 
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const

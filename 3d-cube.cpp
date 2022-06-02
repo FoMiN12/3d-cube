@@ -46,17 +46,25 @@ int main()
     edges[4] = edge5;
     edges[5] = edge6;
 
+    edges[0].setColor(sf::Color::Cyan);
+    edges[1].setColor(sf::Color::Green);
+    edges[2].setColor(sf::Color::Magenta);
+    edges[3].setColor(sf::Color::Red);
+    edges[4].setColor(sf::Color::White);
+    edges[5].setColor(sf::Color::Yellow);
+
     //for (int i = 0;i < 6;i++)
     //    cout << edges[i].vertexes[0].getScreenPosition('x') << ' ';
    // cout << endl;
 
-    Qube qube(edges );
+    Qube qube(edges);
+
 
     //for (int i = 0;i < 6;i++)
     //    cout << qube.edges[i].vertexes[0].getScreenPosition('x') << ' ';
     //cout << endl;
-
-    sf::VertexArray side1(sf::Quads, 4);
+    
+    /*sf::VertexArray side1(sf::Quads, 4);
     sf::VertexArray side2(sf::Quads, 4);
     sf::VertexArray side3(sf::Quads, 4);
     sf::VertexArray side4(sf::Quads, 4);
@@ -74,7 +82,8 @@ int main()
     for (int i = 0; i < 4; i++)
         side5[i].color = sf::Color::Red;
     for (int i = 0; i < 4; i++)
-        side6[i].color = sf::Color::White;
+        side6[i].color = sf::Color::White;*/
+
     //for (int i = 0; i < 0; i++) {
    // cout << side1[0].position.x << endl;
 
@@ -112,7 +121,7 @@ int main()
         for (int i = 0;i < 6;i++)
             qube.edges[i].rotate(currentAngularDiv);
         
-        for (int i = 0; i < 4; i++) {
+        /*for (int i = 0; i < 4; i++) {
             side1[i].position.x = qube.edges[0].vertexes[i].getScreenPosition('x');
             side1[i].position.y = qube.edges[0].vertexes[i].getScreenPosition('y');
         }
@@ -135,12 +144,13 @@ int main()
         for (int i = 0; i < 4; i++) {
             side6[i].position.x = qube.edges[0].vertexes[i].getScreenPosition('x');
             side6[i].position.y = qube.edges[0].vertexes[i].getScreenPosition('y');
-        }
+        }*/
 
 
         
         //cout << dot1.screenPosition.y << ' ' << dot2.screenPosition.y << ' ' << dot3.screenPosition.y << ' ';
         // define the color of the triangle's points
+        qube.updateDrawOrder();
         for (int i = 0;i < 6;i++)
         {
             int order = qube.drawOrder[i];

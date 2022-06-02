@@ -123,6 +123,8 @@ Side::Side(Dot dot1, Dot dot2, Dot dot3, Dot dot4)
     vertexes[1] = dot2;
     vertexes[2] = dot3;
     vertexes[3] = dot4;
+
+   // updateVertices();
     m_vertices[0].position.x = dot1.getScreenPosition('x');
     m_vertices[0].position.y = dot1.getScreenPosition('y');
     m_vertices[1].position.x = dot2.getScreenPosition('x');
@@ -158,6 +160,8 @@ Side::Side()
     vertexes[1] = dot2;
     vertexes[2] = dot3;
     vertexes[3] = dot4;
+
+    //updateVertices();
     m_vertices[0].position.x = dot1.getScreenPosition('x');
     m_vertices[0].position.y = dot1.getScreenPosition('y');
     m_vertices[1].position.x = dot2.getScreenPosition('x');
@@ -194,7 +198,15 @@ void Side::rotate(float angles[3])
 {
     for (int i = 0;i < 4;i++)
         vertexes[i].rotate(angles);
-    
+    updateVertices();
+}
+
+void Side::updateVertices()
+{
+    for (int i = 0;i < 4;i++) {
+        m_vertices[i].position.x = vertexes[i].getScreenPosition('x');
+        m_vertices[i].position.y = vertexes[i].getScreenPosition('y');
+    }
 }
 
 void Qube::rotate(float angles[3])
