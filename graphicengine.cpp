@@ -16,12 +16,6 @@ Dot::Dot(float x, float y, float z)
     coordinates3D[0][1] = y;
     coordinates3D[0][2] = z;
 
-    /*float** result = rotate2default(coordinates3D, 1);
-    for (int i = 0; i < 3; i++)
-        coordinates3D[0][i] = result[0][i];
-    delete[] result[0];
-    delete[] result;*/
-
     set3D2Screen();
 }
 
@@ -30,12 +24,6 @@ Dot::Dot(float coordinates[1][3])
     m_xScreen = 0;
     m_yScreen = 0;
     m_zScreen = 0;
-
-    /*float** result = rotate2default(coordinates, 1);
-    for (int i = 0; i < 3; i++)
-        coordinates3D[0][i] = result[0][i];
-    delete[] result[0];
-    delete[] result;*/
 
     set3D2Screen();
 }
@@ -54,9 +42,9 @@ Dot::Dot()
 
 void Dot::rotate(float angles[3])
 {
-    float **result = rotateAroundAxisOld(coordinates3D, angles[0], 'x', 1);
-    result = rotateAroundAxisOld(result, angles[1], 'y', 1);
-    result = rotateAroundAxisOld(result, angles[2], 'z', 1);
+    float **result = rotateAroundAxis(coordinates3D, angles[0], 'x', 1);
+    result = rotateAroundAxis(result, angles[1], 'y', 1);
+    result = rotateAroundAxis(result, angles[2], 'z', 1);
 
     for (int i = 0; i < 3; i++)
         coordinates3D[0][i] = result[0][i];
@@ -307,12 +295,5 @@ void Qube::updateDrawOrder()
             }
         }
     }
-
-    /*for (int i = 0; i < 6; i++)
-        cout << edges[drawOrder[i]].depth << ' ';
-    cout << endl;
-    for (int i = 0; i < 6; i++)
-        cout << drawOrder[i] << ' ';
-    cout << endl;*/
 }
 

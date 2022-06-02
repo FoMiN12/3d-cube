@@ -1,7 +1,6 @@
 ﻿#include <iostream>
 
 #include "graphicengine.h"
-//#include <string>
 
 using namespace std;
 
@@ -17,8 +16,8 @@ int main()
     {
         cin.clear();
         while (cin.get() != '\n');
-        cout << "Error!" << endl;
-        cout << "Ошибка ввода. Введите коректное значение" << endl;
+        cout << "Ошибка ввода!" << endl;
+        cout << "Введите корректное значение" << endl;
     }
 
     sf::ContextSettings settings;
@@ -71,7 +70,6 @@ int main()
 
     Qube qube(edges);
 
-    //qube.setSize(size, 150);
     float angularVelocity[3] = { 0.1,0.4,0.8 };
 
     //interface
@@ -172,31 +170,6 @@ int main()
                     break;
             }
         }
-        /*while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-          
-            
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-            if (!wasPressed) {
-                wasPressed = !wasPressed;
-                // left key is pressed: move our character
-                if (choosePos != 0) {
-                    choosePos -= 1;
-                    chooseRectangle.movePositionByX(-270);
-                }
-                else {
-                    choosePos = 2;
-                    chooseRectangle.movePositionByX(540);
-                }
-            }
-        }
-        else{
-            wasPressed = !wasPressed;
-        }*/
 
         elapsed = clock.restart();
 
