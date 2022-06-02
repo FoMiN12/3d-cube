@@ -241,50 +241,31 @@ Qube::Qube(Side q1, Side q2, Side q3, Side q4, Side q5, Side q6 )
 
 void Qube::updateDrawOrder()
 {
-    for (int i = 0; i < 6; i++)
-        cout << edges[drawOrder[i]].depth << ' ';
-    cout << endl;
-    for (int i = 0; i < 6; i++)
-        cout << drawOrder[i] << ' ';
-    cout << endl;
-
     float arrForSort[6];
     for (int i = 0; i < 6;i++)
         arrForSort[i] = edges[i].depth;
 
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 5; j++) {
-            if (arrForSort[j] > arrForSort[j + 1]) {
-                float b = arrForSort[j]; // создали дополнительную переменную
-                arrForSort[j] = arrForSort[j + 1]; // меняем местами
-                arrForSort[j + 1] = b;
-                int tempI = drawOrder[j];
-                drawOrder[j] = drawOrder[j+1];
-                drawOrder[j+1] = tempI;
-                // значения элементов
+    float minimum, a;
+    for (int i = 0; i < 6; i++) {
+        minimum = arrForSort[drawOrder[i]];
+        for (int j = i + 1;j < 6;j++) {
+            a = arrForSort[drawOrder[j]];
+            if (a < minimum) { 
+                float b = arrForSort[drawOrder[i]]; // создали дополнительную переменную
+                arrForSort[drawOrder[i]] = arrForSort[drawOrder[j]]; // меняем местами
+                arrForSort[drawOrder[j]] = b;
+                int tempI = drawOrder[i];
+                drawOrder[i] = drawOrder[j];
+                drawOrder[j] = tempI;
             }
         }
     }
 
-
-    /*float minimum, a;
-    for (int i = 0; i < 6; i++) {
-        minimum = edges[i].depth;
-        for (int j = i + 1;j < 6;j++) {
-            a = edges[j].depth;
-            if (a < minimum) {
-                drawOrder[j] = i;
-                drawOrder[i] = j;
-                minimum = edges[j].depth;
-            }
-        }
-    }*/
-
-    for (int i = 0; i < 6; i++)
+    /*for (int i = 0; i < 6; i++)
         cout << edges[drawOrder[i]].depth << ' ';
     cout << endl;
     for (int i = 0; i < 6; i++)
         cout << drawOrder[i] << ' ';
-    cout << endl;
+    cout << endl;*/
 }
 
