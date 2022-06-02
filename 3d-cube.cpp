@@ -75,13 +75,15 @@ int main()
 
     //interface
     //black background
-    Side backgroundRectangle(100, 1000, 680, 590,sf::Color::Black);
+    Side backgroundRectangle(110, 1010, 680, 590,sf::Color::Black);
     //axisRect
     Side xRectangle(140, 370, 660, 610, sf::Color::Red);
     Side yRectangle(450, 680, 660, 610, sf::Color::Green);
-    Side zRectangle(750, 980, 660, 610, sf::Color::Blue);
+    Side zRectangle(760, 990, 660, 610, sf::Color::Blue);
 
     Side chooseRectangle(135, 375, 665, 605, sf::Color::White);
+    int choosePos = 0;
+    bool wasPressed = false;
 
 
     sf::Font font;
@@ -108,15 +110,87 @@ int main()
     sf::Clock clock;
     sf::Time elapsed;
 
+    window.setKeyRepeatEnabled(false);
+
     while (window.isOpen())
     {
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Event event;
-        while (window.pollEvent(event))
+            
+
+        while (window.pollEvent(event)) {
+            // check the type of the event...
+            switch (event.type) {
+                // window closed
+                case sf::Event::Closed:
+                    window.close();
+                    break;
+
+                    // key pressed
+                case sf::Event::KeyPressed:
+                    if (!wasPressed) {
+                        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+                            // left key is pressed: move our character
+                            if (choosePos != 0) {
+                                choosePos -= 1;
+                                chooseRectangle.movePositionByX(-310);
+                            }
+                            else {
+                                choosePos = 2;
+                                chooseRectangle.movePositionByX(620);
+                            }
+                        }
+                        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+                            if (choosePos != 2) {
+                                choosePos += 1;
+                                chooseRectangle.movePositionByX(310);
+                            }
+                            else {
+                                choosePos = 0;
+                                chooseRectangle.movePositionByX(-620);
+                            }
+                        }
+                        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+                            angularVelocity[choosePos] += 0.1;
+                        }
+                        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+                            angularVelocity[choosePos] -= 0.1;
+                        }
+                    }
+                    wasPressed = !wasPressed;
+                    break;
+
+                    // we don't process other types of events
+                default:
+                    wasPressed = false;
+                    break;
+            }
+        }
+        /*while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+          
+            
         }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            if (!wasPressed) {
+                wasPressed = !wasPressed;
+                // left key is pressed: move our character
+                if (choosePos != 0) {
+                    choosePos -= 1;
+                    chooseRectangle.movePositionByX(-270);
+                }
+                else {
+                    choosePos = 2;
+                    chooseRectangle.movePositionByX(540);
+                }
+            }
+        }
+        else{
+            wasPressed = !wasPressed;
+        }*/
 
         elapsed = clock.restart();
 

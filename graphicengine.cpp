@@ -217,6 +217,8 @@ void Side::movePositionByX(float posDifference)
         float x = vertexes[i].getScreenPosition('x') + posDifference;
         vertexes[i].setScreenPosition(x, vertexes[i].getScreenPosition('y'));
     }
+
+    updateVertices();
 }
 
 void Side::rotate(float angles[3])
