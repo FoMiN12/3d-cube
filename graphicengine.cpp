@@ -54,9 +54,9 @@ Dot::Dot()
 
 void Dot::rotate(float angles[3])
 {
-    float **result = rotateAroundAxisNew(coordinates3D, angles[0], 'x', 1);
-    result = rotateAroundAxisNew(result, angles[1], 'y', 1);
-    result = rotateAroundAxisNew(result, angles[2], 'z', 1);
+    float **result = rotateAroundAxisOld(coordinates3D, angles[0], 'x', 1);
+    result = rotateAroundAxisOld(result, angles[1], 'y', 1);
+    result = rotateAroundAxisOld(result, angles[2], 'z', 1);
 
     for (int i = 0; i < 3; i++)
         coordinates3D[0][i] = result[0][i];
@@ -103,12 +103,12 @@ void Dot::set3DPosition(float x, float y, float z)
     set3D2Screen();
 }
 
-float Side::computeDepth()
+void Side::computeDepth()
 {
     float sumDepth = 0;
     for (int i = 0;i < 4;i++)
         sumDepth += vertexes[i].getScreenPosition('z');
-    return sumDepth / 4.0f;
+    depth = sumDepth / 4.0f;
 }
 
 Side::Side(Dot dot1, Dot dot2, Dot dot3, Dot dot4)
@@ -134,7 +134,7 @@ Side::Side(Dot dot1, Dot dot2, Dot dot3, Dot dot4)
     m_vertices[3].position.x = dot4.getScreenPosition('x');
     m_vertices[3].position.y = dot4.getScreenPosition('y');
 
-    depth = computeDepth();
+    computeDepth();
 
     /*sf::VertexArray figure(sf::Quads, 4);
     sf::VertexArray shape = figure;
@@ -171,7 +171,7 @@ Side::Side()
     m_vertices[3].position.x = dot4.getScreenPosition('x');
     m_vertices[3].position.y = dot4.getScreenPosition('y');
 
-    depth = computeDepth();
+    computeDepth();
     
     //sf::VertexArray shape(sf::Quads, 4);
     //for (int i = 0;i < 4;i++) {
@@ -241,7 +241,33 @@ Qube::Qube(Side q1, Side q2, Side q3, Side q4, Side q5, Side q6 )
 
 void Qube::updateDrawOrder()
 {
-    float minimum, a;
+    for (int i = 0; i < 6; i++)
+        cout << edges[drawOrder[i]].depth << ' ';
+    cout << endl;
+    for (int i = 0; i < 6; i++)
+        cout << drawOrder[i] << ' ';
+    cout << endl;
+
+    float arrForSort[6];
+    for (int i = 0; i < 6;i++)
+        arrForSort[i] = edges[i].depth;
+
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (arrForSort[j] > arrForSort[j + 1]) {
+                float b = arrForSort[j]; // создали дополнительную переменную
+                arrForSort[j] = arrForSort[j + 1]; // меняем местами
+                arrForSort[j + 1] = b;
+                int tempI = drawOrder[j];
+                drawOrder[j] = drawOrder[j+1];
+                drawOrder[j+1] = tempI;
+                // значения элементов
+            }
+        }
+    }
+
+
+    /*float minimum, a;
     for (int i = 0; i < 6; i++) {
         minimum = edges[i].depth;
         for (int j = i + 1;j < 6;j++) {
@@ -252,6 +278,13 @@ void Qube::updateDrawOrder()
                 minimum = edges[j].depth;
             }
         }
-    }
+    }*/
+
+    for (int i = 0; i < 6; i++)
+        cout << edges[drawOrder[i]].depth << ' ';
+    cout << endl;
+    for (int i = 0; i < 6; i++)
+        cout << drawOrder[i] << ' ';
+    cout << endl;
 }
 

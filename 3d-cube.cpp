@@ -11,6 +11,7 @@ int main()
     settings.antialiasingLevel = 8;
 
     sf::RenderWindow window(sf::VideoMode(800, 600), "Cube window", sf::Style::Default, settings);
+    window.setVerticalSyncEnabled(true);
     Dot* dots = new Dot[8];
     Dot dot1(200.f, -200.f, -200.f);
     Dot dot2(-200.f, -200.f, -200.f);
@@ -118,8 +119,12 @@ int main()
         // define the position of the triangle's points
         float currentAngularDiv[3] = { angularVelocity[0] * elapsed.asSeconds(), angularVelocity[1] * elapsed.asSeconds(),
                                            angularVelocity[2] * elapsed.asSeconds() };
-        for (int i = 0;i < 6;i++)
+        for (int i = 0;i < 6;i++) {
             qube.edges[i].rotate(currentAngularDiv);
+            qube.edges[i].computeDepth();
+        }
+           
+            
         
         /*for (int i = 0; i < 4; i++) {
             side1[i].position.x = qube.edges[0].vertexes[i].getScreenPosition('x');
@@ -150,8 +155,9 @@ int main()
         
         //cout << dot1.screenPosition.y << ' ' << dot2.screenPosition.y << ' ' << dot3.screenPosition.y << ' ';
         // define the color of the triangle's points
+        
         qube.updateDrawOrder();
-        for (int i = 0;i < 6;i++)
+        for (int i = 0;i <6;i++)
         {
             int order = qube.drawOrder[i];
             window.draw(qube.edges[order]);

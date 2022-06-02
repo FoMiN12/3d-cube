@@ -37,7 +37,7 @@ public:
 	
 	Side(Dot, Dot, Dot, Dot);
 	Side();
-	float computeDepth();
+	void computeDepth();
 	
 	void rotate(float[3]);
 	void setColor(sf::Color);
