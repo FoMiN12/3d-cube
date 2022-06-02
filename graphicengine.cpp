@@ -66,6 +66,14 @@ void Dot::rotate(float angles[3])
     set3D2Screen();
 }
 
+void Dot::scale(float multiplier)
+{
+    for (int i = 0; i < 3; i++)
+        coordinates3D[0][i] = coordinates3D[0][i] * multiplier;
+
+    set3D2Screen();
+}
+
 float Dot::getScreenPosition(char axis)
 {
     float result;
@@ -124,24 +132,9 @@ Side::Side(Dot dot1, Dot dot2, Dot dot3, Dot dot4)
     vertexes[2] = dot3;
     vertexes[3] = dot4;
 
-   // updateVertices();
-    m_vertices[0].position.x = dot1.getScreenPosition('x');
-    m_vertices[0].position.y = dot1.getScreenPosition('y');
-    m_vertices[1].position.x = dot2.getScreenPosition('x');
-    m_vertices[1].position.y = dot2.getScreenPosition('y');
-    m_vertices[2].position.x = dot3.getScreenPosition('x');
-    m_vertices[2].position.y = dot3.getScreenPosition('y');
-    m_vertices[3].position.x = dot4.getScreenPosition('x');
-    m_vertices[3].position.y = dot4.getScreenPosition('y');
+    updateVertices();
 
     computeDepth();
-
-    /*sf::VertexArray figure(sf::Quads, 4);
-    sf::VertexArray shape = figure;
-    for (int i = 0;i < 4;i++) {
-        shape[i].position = vertexes[i].screenPosition;
-        shape[i].color = color;
-    }*/
 }
 
 Side::Side()
@@ -161,33 +154,11 @@ Side::Side()
     vertexes[2] = dot3;
     vertexes[3] = dot4;
 
-    //updateVertices();
-    m_vertices[0].position.x = dot1.getScreenPosition('x');
-    m_vertices[0].position.y = dot1.getScreenPosition('y');
-    m_vertices[1].position.x = dot2.getScreenPosition('x');
-    m_vertices[1].position.y = dot2.getScreenPosition('y');
-    m_vertices[2].position.x = dot3.getScreenPosition('x');
-    m_vertices[2].position.y = dot3.getScreenPosition('y');
-    m_vertices[3].position.x = dot4.getScreenPosition('x');
-    m_vertices[3].position.y = dot4.getScreenPosition('y');
+    updateVertices();
 
     computeDepth();
-    
-    //sf::VertexArray shape(sf::Quads, 4);
-    //for (int i = 0;i < 4;i++) {
-    //    shape[i].position = vertexes[i].screenPosition;
-    //    shape[i].color = sf::Color::White;
-    //}
 }
 
-/*void Quadrilateral::updatePosition()
-{
-    for (int i = 0;i < 4;i++)
-    {
-        shape[i].position = vertexes[i].screenPosition;
-    }
-    computeDepth();
-}*/
 void Side::setColor(sf::Color color)
 {
     for (int i = 0;i < 4;i++)
@@ -198,6 +169,14 @@ void Side::rotate(float angles[3])
 {
     for (int i = 0;i < 4;i++)
         vertexes[i].rotate(angles);
+    updateVertices();
+}
+
+void Side::scale(float multiplier)
+{
+    for (int i = 0;i < 4;i++)
+        vertexes[i].scale(multiplier);
+
     updateVertices();
 }
 
@@ -215,11 +194,17 @@ void Qube::rotate(float angles[3])
         edges[i].rotate(angles);
 }
 
-Qube::Qube(Side* quadrilaterals)
+void Qube::scale(float multiplier)
+{
+    for (int i = 0;i < 6;i++)
+        edges[i].scale(multiplier);
+}
+
+Qube::Qube(Side* sides)
 {
     edges = new Side[6];
     for (int i = 0;i < 6;i++) {
-        edges[i] = quadrilaterals[i];
+        edges[i] = sides[i];
         drawOrder[i] = i;
     }
 }

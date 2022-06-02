@@ -54,52 +54,13 @@ int main()
     edges[4].setColor(sf::Color::White);
     edges[5].setColor(sf::Color::Yellow);
 
-    //for (int i = 0;i < 6;i++)
-    //    cout << edges[i].vertexes[0].getScreenPosition('x') << ' ';
-   // cout << endl;
-
     Qube qube(edges);
-
-
-    //for (int i = 0;i < 6;i++)
-    //    cout << qube.edges[i].vertexes[0].getScreenPosition('x') << ' ';
-    //cout << endl;
-    
-    /*sf::VertexArray side1(sf::Quads, 4);
-    sf::VertexArray side2(sf::Quads, 4);
-    sf::VertexArray side3(sf::Quads, 4);
-    sf::VertexArray side4(sf::Quads, 4);
-    sf::VertexArray side5(sf::Quads, 4);
-    sf::VertexArray side6(sf::Quads, 4);
-
-    for (int i = 0; i < 4; i++)
-        side1[i].color = sf::Color::Blue;
-    for (int i = 0; i < 4; i++)
-        side2[i].color = sf::Color::Cyan;
-    for (int i = 0; i < 4; i++)
-        side3[i].color = sf::Color::Green;
-    for (int i = 0; i < 4; i++)
-        side4[i].color = sf::Color::Magenta;
-    for (int i = 0; i < 4; i++)
-        side5[i].color = sf::Color::Red;
-    for (int i = 0; i < 4; i++)
-        side6[i].color = sf::Color::White;*/
-
-    //for (int i = 0; i < 0; i++) {
-   // cout << side1[0].position.x << endl;
-
-    //}
-    /*sf::VertexArray triangle(sf::Quads, 4);
-    triangle[0].color = sf::Color::Red;
-    triangle[1].color = sf::Color::Blue;
-    triangle[2].color = sf::Color::Green;
-    triangle[3].color = sf::Color::Cyan;*/
 
 
     sf::Clock clock;
     sf::Time elapsed;
 
-    float angularVelocity[3] = {0.8,0.8,0.8 };
+    float angularVelocity[3] = {0.1,0.4,0.8 };
    
 
     while (window.isOpen())
@@ -123,37 +84,7 @@ int main()
             qube.edges[i].rotate(currentAngularDiv);
             qube.edges[i].computeDepth();
         }
-           
-            
         
-        /*for (int i = 0; i < 4; i++) {
-            side1[i].position.x = qube.edges[0].vertexes[i].getScreenPosition('x');
-            side1[i].position.y = qube.edges[0].vertexes[i].getScreenPosition('y');
-        }
-        for (int i = 0; i < 4; i++) {
-            side2[i].position.x = qube.edges[0].vertexes[i].getScreenPosition('x');
-            side2[i].position.y = qube.edges[0].vertexes[i].getScreenPosition('y');
-        }
-        for (int i = 0; i < 4; i++) {
-            side3[i].position.x = qube.edges[0].vertexes[i].getScreenPosition('x');
-            side3[i].position.y = qube.edges[0].vertexes[i].getScreenPosition('y');
-        }
-        for (int i = 0; i < 4; i++) {
-            side4[i].position.x = qube.edges[0].vertexes[i].getScreenPosition('x');
-            side4[i].position.y = qube.edges[0].vertexes[i].getScreenPosition('y');
-        }
-        for (int i = 0; i < 4; i++) {
-            side5[i].position.x = qube.edges[0].vertexes[i].getScreenPosition('x');
-            side5[i].position.y = qube.edges[0].vertexes[i].getScreenPosition('y');
-        }
-        for (int i = 0; i < 4; i++) {
-            side6[i].position.x = qube.edges[0].vertexes[i].getScreenPosition('x');
-            side6[i].position.y = qube.edges[0].vertexes[i].getScreenPosition('y');
-        }*/
-
-
-        
-        //cout << dot1.screenPosition.y << ' ' << dot2.screenPosition.y << ' ' << dot3.screenPosition.y << ' ';
         // define the color of the triangle's points
         
         qube.updateDrawOrder();
@@ -162,7 +93,6 @@ int main()
             int order = qube.drawOrder[i];
             window.draw(qube.edges[order]);
         }
-        //window.draw(triangle);
 
         window.display();
     }

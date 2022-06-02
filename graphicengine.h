@@ -16,6 +16,7 @@ public:
 
 	void set3D2Screen();
 	void rotate(float[3]);
+	void scale(float);
 
 	float getScreenPosition(char);
 	void set3DPosition(float, float, float);
@@ -40,6 +41,8 @@ public:
 	void computeDepth();
 	
 	void rotate(float[3]);
+	void scale(float);
+
 	void setColor(sf::Color);
 	void updateVertices();
 
@@ -49,15 +52,11 @@ private:
 		// apply the transform
 		states.transform *= getTransform();
 
-		// apply the tileset texture
-		//states.texture = &m_tileset;
-
 		// draw the vertex array
 		target.draw(m_vertices, states);
 	}
 
 	sf::VertexArray m_vertices;
-	//sf::Texture m_tileset;
 };
 
 class Qube
@@ -69,6 +68,7 @@ public:
 	Qube(Side, Side, Side, Side, Side, Side);
 
 	void rotate(float[3]);
+	void scale(float);
 
 	void updateDrawOrder();
 
