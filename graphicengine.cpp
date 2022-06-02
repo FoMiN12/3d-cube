@@ -2,8 +2,8 @@
 
 void Dot::set3D2Screen()
 {
-    m_xScreen = 400.f + coordinates3D[0][1];
-    m_yScreen = 300.f - coordinates3D[0][2];
+    m_xScreen = 550.f + coordinates3D[0][1];
+    m_yScreen = 350.f - coordinates3D[0][2];
     m_zScreen = coordinates3D[0][0];
 }
 
@@ -96,6 +96,12 @@ float Dot::getScreenPosition(char axis)
     return result;
 }
 
+void Dot::setScreenPosition(float x, float y)
+{
+    m_xScreen = x;
+    m_yScreen = y;
+}
+
 void Dot::set3DPosition(float coordinates[1][3])
 {
     for (int i = 0;i < 3;i++)
@@ -131,6 +137,20 @@ Side::Side(Dot dot1, Dot dot2, Dot dot3, Dot dot4)
     vertexes[1] = dot2;
     vertexes[2] = dot3;
     vertexes[3] = dot4;
+
+    updateVertices();
+
+    computeDepth();
+}
+
+Side::Side(Dot* dots)
+{
+    m_vertices.setPrimitiveType(sf::Quads);
+    m_vertices.resize(4);
+
+    setColor(sf::Color::White);
+
+    vertexes = dots;
 
     updateVertices();
 

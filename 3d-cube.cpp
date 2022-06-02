@@ -23,9 +23,10 @@ int main()
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
 
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Cube window", sf::Style::Default, settings);
+    sf::RenderWindow window(sf::VideoMode(1100, 700), "Cube window", sf::Style::Default, settings);
     window.setVerticalSyncEnabled(true);
 
+    //qube
 
     Dot* dots = new Dot[8];
     Dot dot1(size, -size, -size);
@@ -69,14 +70,33 @@ int main()
 
     Qube qube(edges);
 
+    //qube.setSize(size, 150);
+    float angularVelocity[3] = { 0.1,0.4,0.8 };
+
+    //interface
+    //black background
+    Dot* backgroundDots = new Dot[8];
+
+    Dot backgroundDots1;
+    Dot backgroundDots2;
+    Dot backgroundDots3;
+    Dot backgroundDots4;
+    backgroundDots1.setScreenPosition(100, 680);
+    backgroundDots2.setScreenPosition(1000, 680);
+    backgroundDots3.setScreenPosition(1000, 590);
+    backgroundDots4.setScreenPosition(100, 590);
+    backgroundDots[0] = backgroundDots1;
+    backgroundDots[1] = backgroundDots2;
+    backgroundDots[2] = backgroundDots3;
+    backgroundDots[3] = backgroundDots4;
+
+    Side backgroundRectangle(backgroundDots);
+    backgroundRectangle.setColor(sf::Color::Black);
+
+    //
 
     sf::Clock clock;
     sf::Time elapsed;
-
-
-    qube.setSize(size, 150);
-    float angularVelocity[3] = {0.1,0.4,0.8 };
-   
 
     while (window.isOpen())
     {
@@ -108,6 +128,8 @@ int main()
             int order = qube.drawOrder[i];
             window.draw(qube.edges[order]);
         }
+
+        window.draw(backgroundRectangle);
 
         window.display();
     }

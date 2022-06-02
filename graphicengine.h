@@ -19,6 +19,8 @@ public:
 	void scale(float);
 
 	float getScreenPosition(char);
+	void setScreenPosition(float, float);
+
 	void set3DPosition(float, float, float);
 	void set3DPosition(float(*)[3]);
 
@@ -37,6 +39,7 @@ public:
 	float depth;
 	
 	Side(Dot, Dot, Dot, Dot);
+	Side(Dot*);
 	Side();
 	void computeDepth();
 	
