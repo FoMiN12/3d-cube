@@ -81,6 +81,30 @@ int main()
     Side yRectangle(450, 680, 660, 610, sf::Color::Green);
     Side zRectangle(750, 980, 660, 610, sf::Color::Blue);
 
+    Side chooseRectangle(135, 375, 665, 605, sf::Color::White);
+
+
+    sf::Font font;
+    if (!font.loadFromFile("arial.ttf"))
+    {
+        // error...
+    }
+
+    sf::Text text;
+
+    // select the font
+    text.setFont(font); // font is a sf::Font
+
+    // set the string to display
+    text.setString("Hello world");
+
+    // set the character size
+    text.setCharacterSize(24); // in pixels, not points!
+
+    // set the color
+    text.setFillColor(sf::Color::Red);
+
+
     sf::Clock clock;
     sf::Time elapsed;
 
@@ -116,9 +140,14 @@ int main()
         }
 
         window.draw(backgroundRectangle);
+
+        window.draw(chooseRectangle);
+
         window.draw(xRectangle);
         window.draw(yRectangle);
         window.draw(zRectangle);
+
+
 
         window.display();
     }
