@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 
 #include "graphicengine.h"
+//#include <string>
 
 using namespace std;
 
@@ -92,19 +93,24 @@ int main()
         // error...
     }
 
-    sf::Text text;
+    sf::Text xSpeedtext;
+    xSpeedtext.setFont(font);
+    xSpeedtext.setCharacterSize(20);
+    xSpeedtext.setFillColor(sf::Color::Black);
 
-    // select the font
-    text.setFont(font); // font is a sf::Font
+    sf::Text ySpeedtext;
+    ySpeedtext.setFont(font);
+    ySpeedtext.setCharacterSize(20);
+    ySpeedtext.setFillColor(sf::Color::Black);
 
-    // set the string to display
-    text.setString("Hello world");
+    sf::Text zSpeedtext;
+    zSpeedtext.setFont(font);
+    zSpeedtext.setCharacterSize(20);
+    zSpeedtext.setFillColor(sf::Color::Black);
 
-    // set the character size
-    text.setCharacterSize(24); // in pixels, not points!
-
-    // set the color
-    text.setFillColor(sf::Color::Red);
+    xSpeedtext.setPosition(160, 620);
+    ySpeedtext.setPosition(470, 620);
+    zSpeedtext.setPosition(780, 620);
 
 
     sf::Clock clock;
@@ -203,7 +209,11 @@ int main()
             qube.edges[i].rotate(currentAngularDiv);
             qube.edges[i].computeDepth();
         }
-        
+
+        xSpeedtext.setString("Velocity Around X: " + to_string((int)(angularVelocity[0] * 10)));
+        ySpeedtext.setString("Velocity Around Y: " + to_string((int)(angularVelocity[1] * 10)));
+        zSpeedtext.setString("Velocity Around Z: " + to_string((int)(angularVelocity[2] * 10)));
+
         // define the color of the triangle's points
         
         qube.updateDrawOrder();
@@ -220,6 +230,10 @@ int main()
         window.draw(xRectangle);
         window.draw(yRectangle);
         window.draw(zRectangle);
+
+        window.draw(xSpeedtext);
+        window.draw(ySpeedtext);
+        window.draw(zSpeedtext);
 
 
 
