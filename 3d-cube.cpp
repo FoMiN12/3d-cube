@@ -99,7 +99,7 @@ int main()
     sf::Clock clock;
     sf::Time elapsed;
 
-    float angularVelocity[3] = {0.0,0.0,0.8 };
+    float angularVelocity[3] = {0.8,0.8,0.8 };
    
 
     while (window.isOpen())

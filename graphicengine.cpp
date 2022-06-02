@@ -16,11 +16,11 @@ Dot::Dot(float x, float y, float z)
     coordinates3D[0][1] = y;
     coordinates3D[0][2] = z;
 
-    float** result = rotate2default(coordinates3D, 1);
+    /*float** result = rotate2default(coordinates3D, 1);
     for (int i = 0; i < 3; i++)
         coordinates3D[0][i] = result[0][i];
     delete[] result[0];
-    delete[] result;
+    delete[] result;*/
 
     set3D2Screen();
 }
@@ -31,11 +31,11 @@ Dot::Dot(float coordinates[1][3])
     m_yScreen = 0;
     m_zScreen = 0;
 
-    float** result = rotate2default(coordinates, 1);
+    /*float** result = rotate2default(coordinates, 1);
     for (int i = 0; i < 3; i++)
         coordinates3D[0][i] = result[0][i];
     delete[] result[0];
-    delete[] result;
+    delete[] result;*/
 
     set3D2Screen();
 }
@@ -252,7 +252,7 @@ void Qube::updateDrawOrder()
     for (int i = 0; i < 6;i++)
         arrForSort[i] = edges[i].depth;
 
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 5; j++) {
             if (arrForSort[j] > arrForSort[j + 1]) {
                 float b = arrForSort[j]; // создали дополнительную переменную
