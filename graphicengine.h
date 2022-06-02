@@ -44,6 +44,7 @@ public:
 	Side();
 	void computeDepth();
 	
+	void movePositionByX(float);
 	void rotate(float[3]);
 	void scale(float);
 

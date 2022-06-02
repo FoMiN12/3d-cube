@@ -211,6 +211,14 @@ void Side::setColor(sf::Color color)
         m_vertices[i].color = color;
 }
 
+void Side::movePositionByX(float posDifference)
+{
+    for (int i = 0; i < 4;i++) {
+        float x = vertexes[i].getScreenPosition('x') + posDifference;
+        vertexes[i].setScreenPosition(x, vertexes[i].getScreenPosition('y'));
+    }
+}
+
 void Side::rotate(float angles[3])
 {
     for (int i = 0;i < 4;i++)
