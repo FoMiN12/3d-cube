@@ -200,6 +200,12 @@ void Qube::scale(float multiplier)
         edges[i].scale(multiplier);
 }
 
+void Qube::setSize(float oldSize, float newSize)
+{
+    float multiplier = newSize / oldSize;
+    scale(multiplier);
+}
+
 Qube::Qube(Side* sides)
 {
     edges = new Side[6];

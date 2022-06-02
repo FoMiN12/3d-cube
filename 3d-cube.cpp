@@ -6,21 +6,36 @@ using namespace std;
 
 int main()
 {
-    
+    setlocale(LC_ALL, "ru");
+
+    float size = 150;
+
+    cout << "Введите размер куба. Рекомендуется: 150" << endl;
+
+    while (!(cin >> size) || (cin.peek() != '\n'))
+    {
+        cin.clear();
+        while (cin.get() != '\n');
+        cout << "Error!" << endl;
+        cout << "Ошибка ввода. Введите коректное значение" << endl;
+    }
+
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
 
     sf::RenderWindow window(sf::VideoMode(800, 600), "Cube window", sf::Style::Default, settings);
     window.setVerticalSyncEnabled(true);
+
+
     Dot* dots = new Dot[8];
-    Dot dot1(200.f, -200.f, -200.f);
-    Dot dot2(-200.f, -200.f, -200.f);
-    Dot dot3(-200.f, 200.f, -200.f);
-    Dot dot4(200.f, 200.f, -200.f);
-    Dot dot5(200.f, -200.f, 200.f);
-    Dot dot6(-200.f, -200.f, 200.f);
-    Dot dot7(-200.f, 200.f, 200.f);
-    Dot dot8(200.f, 200.f, 200.f);
+    Dot dot1(size, -size, -size);
+    Dot dot2(-size, -size, -size);
+    Dot dot3(-size, size, -size);
+    Dot dot4(size, size, -size);
+    Dot dot5(size, -size, size);
+    Dot dot6(-size, -size, size);
+    Dot dot7(-size, size, size);
+    Dot dot8(size, size, size);
     dots[0] = dot1;
     dots[1] = dot2;
     dots[2] = dot3;
@@ -29,8 +44,6 @@ int main()
     dots[5] = dot6;
     dots[6] = dot7;
     dots[7] = dot8;
-   cout << dot1.getScreenPosition('x') << " ";
-    cout << dot7.getScreenPosition('x') << endl;
 
     Side edge1(dot1, dot2, dot3, dot4);
     Side edge2(dot1, dot2, dot6, dot5);
@@ -60,6 +73,8 @@ int main()
     sf::Clock clock;
     sf::Time elapsed;
 
+
+    qube.setSize(size, 150);
     float angularVelocity[3] = {0.1,0.4,0.8 };
    
 
