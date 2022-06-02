@@ -40,6 +40,7 @@ public:
 	
 	Side(Dot, Dot, Dot, Dot);
 	Side(Dot*);
+	Side(float, float, float, float, sf::Color);
 	Side();
 	void computeDepth();
 	

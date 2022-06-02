@@ -75,25 +75,11 @@ int main()
 
     //interface
     //black background
-    Dot* backgroundDots = new Dot[8];
-
-    Dot backgroundDots1;
-    Dot backgroundDots2;
-    Dot backgroundDots3;
-    Dot backgroundDots4;
-    backgroundDots1.setScreenPosition(100, 680);
-    backgroundDots2.setScreenPosition(1000, 680);
-    backgroundDots3.setScreenPosition(1000, 590);
-    backgroundDots4.setScreenPosition(100, 590);
-    backgroundDots[0] = backgroundDots1;
-    backgroundDots[1] = backgroundDots2;
-    backgroundDots[2] = backgroundDots3;
-    backgroundDots[3] = backgroundDots4;
-
-    Side backgroundRectangle(backgroundDots);
-    backgroundRectangle.setColor(sf::Color::Black);
-
-    //
+    Side backgroundRectangle(100, 1000, 680, 590,sf::Color::Black);
+    //axisRect
+    Side xRectangle(140, 370, 660, 610, sf::Color::Red);
+    Side yRectangle(450, 680, 660, 610, sf::Color::Green);
+    Side zRectangle(750, 980, 660, 610, sf::Color::Blue);
 
     sf::Clock clock;
     sf::Time elapsed;
@@ -130,6 +116,9 @@ int main()
         }
 
         window.draw(backgroundRectangle);
+        window.draw(xRectangle);
+        window.draw(yRectangle);
+        window.draw(zRectangle);
 
         window.display();
     }

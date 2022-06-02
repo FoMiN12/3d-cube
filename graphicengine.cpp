@@ -179,6 +179,32 @@ Side::Side()
     computeDepth();
 }
 
+Side::Side(float x1,float x2,float y1, float y2, sf::Color color)
+{
+    m_vertices.setPrimitiveType(sf::Quads);
+    m_vertices.resize(4);
+
+    setColor(color);
+
+    vertexes = new Dot[4];
+    Dot dot1;
+    Dot dot2;
+    Dot dot3;
+    Dot dot4;
+    dot1.setScreenPosition(x1, y1);
+    dot2.setScreenPosition(x2, y1);
+    dot3.setScreenPosition(x2, y2);
+    dot4.setScreenPosition(x1, y2);
+    vertexes[0] = dot1;
+    vertexes[1] = dot2;
+    vertexes[2] = dot3;
+    vertexes[3] = dot4;
+
+    updateVertices();
+
+    computeDepth();
+}
+
 void Side::setColor(sf::Color color)
 {
     for (int i = 0;i < 4;i++)
